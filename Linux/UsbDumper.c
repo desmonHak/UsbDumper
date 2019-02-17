@@ -7,6 +7,7 @@
 
 void Buscar( char ruta[200] ,char Ruta_Guardado[200] ,DIR *base );
 void Copiar( char *File_Name, char Ruta_Pendrive[200] ,char Ruta_Guardado[200] );
+
 void StrCat(char String_Base[200], char *String_Agregado);
 void SacarEspacios(char String[200]);
 void CrearCarpeta(char Ruta[200], char *NombreDeCarpeta);
