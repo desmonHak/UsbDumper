@@ -1,5 +1,35 @@
-#include <sys/stat.h>
 #include <stdbool.h>
+
+#ifdef _WIN32
+
+#include <dirent.h>
+
+bool isdir(char *dir_name) {
+	DIR *dir = opendir(dir_name);
+	bool response;
+
+	if (dir) {
+		response = true;
+		
+	} else {
+		response = false;
+		
+	}
+	
+	closedir(dir);
+	
+	return response;
+	
+}
+
+bool isfile(char *name) {
+	return !isdir(name);
+	
+}
+
+#else
+
+#include <sys/stat.h>
 
 bool isdir(char *dir_name) {
 	struct stat st;
@@ -13,10 +43,10 @@ bool isdir(char *dir_name) {
 
 }
 
-bool isfile(char *dir_name) {
+bool isfile(char *name) {
 	struct stat st;
 
-	if (lstat(dir_name, &st) == -1) {
+	if (lstat(name, &st) == -1) {
 		return false;
 
 	}
@@ -24,3 +54,5 @@ bool isfile(char *dir_name) {
 	return S_ISREG(st.st_mode);
 
 }
+
+#endif

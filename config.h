@@ -4,28 +4,28 @@
 #ifdef _WIN32
 
 void *folders[][2] = {
-	{ "D:", NULL },
-	{ "E:", NULL },
-	{ "F:", NULL },
-	{ "G:", NULL },
-	{ "H:", NULL },
-	{ "I:", NULL },
-	{ "J:", NULL },
-	{ "K:", NULL },
-	{ "L:", NULL },
-	{ "M:", NULL },
-	{ "N:", NULL },
-	{ "O:", NULL },
-	{ "P:", NULL },
-	{ "Q:", NULL },
-	{ "R:", NULL },
-	{ "S:", NULL },
-	{ "T:", NULL },
-	{ "U:", NULL },
-	{ "V:", NULL },
-	{ "X:", NULL },
-	{ "Y:", NULL },
-	{ "Z:", NULL }
+	//{ "D:", NULL },
+	//{ "E:", NULL },
+	//{ "F:", NULL },
+	{ "G:", NULL }
+	//{ "H:", NULL },
+	//{ "I:", NULL },
+	//{ "J:", NULL },
+	//{ "K:", NULL },
+	//{ "L:", NULL },
+	//{ "M:", NULL },
+	//{ "N:", NULL },
+	//{ "O:", NULL },
+	//{ "P:", NULL },
+	//{ "Q:", NULL },
+	//{ "R:", NULL },
+	//{ "S:", NULL },
+	//{ "T:", NULL },
+	//{ "U:", NULL },
+	//{ "V:", NULL },
+	//{ "X:", NULL },
+	//{ "Y:", NULL },
+	//{ "Z:", NULL }
 
 };
 

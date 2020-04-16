@@ -31,7 +31,7 @@ void listin(char *path, char *outdir) {
 				dirtocopy = dirtoname(name);
 				aux = concat_name(outdir, dirtocopy);
 
-				if(dirent->d_type == DT_DIR){
+				if(isdir(name)){
 					printf("Creando %s ...\n",
 						   aux);
 
@@ -44,7 +44,7 @@ void listin(char *path, char *outdir) {
 
 				}
 
-				if (dirent->d_type == DT_REG) {
+				if (isfile(name)) {
 					printf("Copiando %s ...\n",
 						   name);
 

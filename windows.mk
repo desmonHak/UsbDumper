@@ -1,3 +1,4 @@
+TARGET = UsbDumper.exe
 RM = del
 RMFLAGS = /Q
 

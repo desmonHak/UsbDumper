@@ -14,4 +14,5 @@ cleanall: cleanobj
 	$(RM) $(RMFLAGS) $(TARGET)
 
 .SILENT: clean cleanobj cleanall
+.IGNORE: cleanobj cleanall
 .PHONY: cleanobj cleanall

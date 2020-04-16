@@ -1,3 +1,4 @@
+TARGET = UsbDumper
 RM = rm
 RMFLAGS = -f -v
 srcdir = .
