@@ -50,13 +50,13 @@ int main(int argc, char *argv[]) {
 
 			case ':':
 				fprintf(stderr, "Error: El parámetro \"-%c/--%s\" requiere un argumento\n",
-								opt, options[index].name);
+								optopt, options[index].name);
 
 				return EXIT_FAILURE;
 
 			case '?':
-				fprintf(stderr, "Error: El parámetro \"-%c\" no se encuentra\n",
-								opt);
+			default:
+				fprintf(stderr, "Error: El parámetro propuesto es incorrecto. Use \"-h/--help\" para requerir la ayuda\n");
 				
 				return ESRCH;
 

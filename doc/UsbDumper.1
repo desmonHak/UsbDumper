@@ -1,0 +1,36 @@
+.TH UsbDumper 1 2020-04-16 "UsbDumper 2.0" "Manual básico de UsbDumper"
+
+.SH NAME
+UsbDumper - Simple utilidad para extraer archivos de los dispositivos víctimas
+
+.SH SYNOPSIS
+.BI "UsbDumper [-h] [-o] " "OUTDIR"
+
+.SH DESCRIPTION
+.PP
+.B UsbDumper
+es una pequeña utilidad para extraer ficheros sigilosamente de dispositivos víctimas de forma arbitraria. Puede ser útil para un posterior análisis de un incidente.
+
+.SH OPTIONS
+.TP
+.B -h,--help
+Muestra la ayuda
+
+.TP
+.B -o,--outdir
+El directorio donde se guardarán los archivos
+
+.SH EXAMPLES
+.B UsbDumper
+-o $HOME/.UsbDumper
+.br
+.B UsbDumper
+-o /tmp/output
+.br
+.B UsbDumper
+-o output
+
+.SH AUTHOR(s)
+DtxdF <DtxdF@protonmail.com>
+.br
+MysteriusFat <jm_ramirez13@hotmail.com>

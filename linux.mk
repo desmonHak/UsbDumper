@@ -4,6 +4,7 @@ RMFLAGS = -f -v
 srcdir = .
 prefix = /usr
 exec_prefix = $(prefix)
+srvdir = /etc/init.d
 bindir = $(exec_prefix)/bin
 mandir = $(prefix)/share/man
 man1dir = $(mandir)/man1
@@ -21,6 +22,7 @@ install: all
 	$(INSTALL) -v -d "$(man1dir)"
 	
 	-$(INSTALL_PROGRAM) "$(srcdir)/$(TARGET)" "$(bindir)"
+	-$(INSTALL_PROGRAM) "$(srcdir)/install/$(TARGET)" "$(srvdir)"
 
 	if ! [ -f "$(srcdir)/doc/$(TARGET).1.gz" ] ; \
 	then \
@@ -28,10 +30,15 @@ install: all
 	fi;
 
 	-$(INSTALL_DATA) "$(srcdir)/doc/$(TARGET).1.gz" "$(man1dir)"
+	-$(bindir)/systemctl daemon-reload
+	-$(srvdir)/$(TARGET) restart
+	-$(bindir)/systemctl enable $(TARGET)
 
 
 uninstall:
 	-$(RM) $(RMFLAGS) "$(bindir)/$(TARGET)"
 	-$(RM) $(RMFLAGS) "$(man1dir)/$(TARGET).1.gz"
+	-$(RM) $(RMFLAGS) "$(srvdir)/$(TARGET)"
 
 .PHONY: install uninstall
+.SILENT: uninstall
