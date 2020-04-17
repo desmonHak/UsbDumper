@@ -7,7 +7,7 @@ void *folders[][2] = {
 	//{ "D:", NULL },
 	//{ "E:", NULL },
 	//{ "F:", NULL },
-	{ "G:", NULL }
+	{ "G:", NULL },
 	//{ "H:", NULL },
 	//{ "I:", NULL },
 	//{ "J:", NULL },
@@ -32,15 +32,14 @@ void *folders[][2] = {
 #else
 
 void *folders[][2] = {
-	{ "/media/root",  NULL },
-	{ "/media/dtxdf", NULL }
+	{ "/media/root",  NULL }
 
 };
 
 
 #endif
 
-size_t nmemb = sizeof(folders)/16;
+size_t nmemb = sizeof(folders)/sizeof(folders[0]);
 size_t end = 0;
 
 #endif
