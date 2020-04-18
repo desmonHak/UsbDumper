@@ -50,4 +50,16 @@ UsbDumper.exe -h
 * Cuando se termine de extraer todos los archivos, el programa tomará en cuenta la ruta como identificador para no volver a copiar los archivos
 * El archivo [config.h](config.h) es el encargado de verificar los dispositivos víctimas, y es el usuario el que decide qué dispositivos serán los que se desea extraer los archivos
 
+## Capturas de pantalla
+
+### Instalando:
+![](https://u.cubeupload.com/Josef/instalation.png)
+
+### Copiando los archivos del dispositivo víctima:
+![](https://u.cubeupload.com/Josef/init.png)
+
+
+### Terminando la extracción:
+![](https://u.cubeupload.com/Josef/end.png)
+
 \~ DtxdF
