@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
 	opterr = 0;
 	index = 0;
 
+	/* Cambiamos la codificación local a Español de españa */
 	setlocaleU();
 
 	while ((opt = getopt_long(argc, argv, shortopts,
@@ -54,14 +55,14 @@ int main(int argc, char *argv[]) {
 				break;
 
 			case ':':
-				fprintfU(stderr, "Error: El parámetro \"-%c/--%s\" requiere un argumento\n",
+				fprintf(stderr, "Error: El par"A_ACENT"metro \"-"CHAR_FORMAT"/--"STRING_FORMAT"\" requiere un argumento\n",
 								 optopt, options[index].name);
 
 				return EXIT_FAILURE;
 
 			case '?':
 			default:
-				fprintfU(stderr, "Error: El parámetro propuesto es incorrecto. Use \"-h/--help\" para requerir la ayuda\n");
+				fprintf(stderr, "Error: El par"A_ACENT"metro propuesto es incorrecto. Use \"-h/--help\" para requerir la ayuda\n");
 				
 				return ESRCH;
 
@@ -70,7 +71,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	if ((index == 0) && (opt == -1)) {
-		fprintfU(stderr, "Error: Usa el parámetro \"-h/--help\" para mostrar la ayuda\n");
+		fprintf(stderr, "Error: Usa el par"A_ACENT"metro \"-h/--help\" para mostrar la ayuda\n");
 
 		return EXIT_FAILURE;
 
@@ -111,7 +112,7 @@ int main(int argc, char *argv[]) {
 				   target);
 
 		} else {
-			fprintfU(stderr, "%s no es un directorio válido.\n",
+			fprintf(stderr, STRING_FORMAT" no es un directorio v"A_ACENT"lido.\n",
 							target);
 
 			return errno;
