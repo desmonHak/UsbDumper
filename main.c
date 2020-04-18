@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
+#include <wchar.h>
+#include <locale.h>
 
 #include "listin.h"
 #include "is.h"
@@ -11,6 +13,7 @@
 #include "mkdir.h"
 #include "concat_name.h"
 #include "detect.h"
+#include "chars.h"
 
 void usage();
 
@@ -35,6 +38,8 @@ int main(int argc, char *argv[]) {
 	opterr = 0;
 	index = 0;
 
+	setlocaleU();
+
 	while ((opt = getopt_long(argc, argv, shortopts,
 							  options, NULL)) != -1) {
 		index += 1;
@@ -49,14 +54,14 @@ int main(int argc, char *argv[]) {
 				break;
 
 			case ':':
-				fprintf(stderr, "Error: El parámetro \"-%c/--%s\" requiere un argumento\n",
-								optopt, options[index].name);
+				fprintfU(stderr, "Error: El parámetro \"-%c/--%s\" requiere un argumento\n",
+								 optopt, options[index].name);
 
 				return EXIT_FAILURE;
 
 			case '?':
 			default:
-				fprintf(stderr, "Error: El parámetro propuesto es incorrecto. Use \"-h/--help\" para requerir la ayuda\n");
+				fprintfU(stderr, "Error: El parámetro propuesto es incorrecto. Use \"-h/--help\" para requerir la ayuda\n");
 				
 				return ESRCH;
 
@@ -65,7 +70,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	if ((index == 0) && (opt == -1)) {
-		fprintf(stderr, "Error: Usa el parámetro \"-h/--help\" para mostrar la ayuda\n");
+		fprintfU(stderr, "Error: Usa el parámetro \"-h/--help\" para mostrar la ayuda\n");
 
 		return EXIT_FAILURE;
 
@@ -106,7 +111,7 @@ int main(int argc, char *argv[]) {
 				   target);
 
 		} else {
-			fprintf(stderr, "%s no es un directorio válido.\n",
+			fprintfU(stderr, "%s no es un directorio válido.\n",
 							target);
 
 			return errno;
