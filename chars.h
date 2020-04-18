@@ -6,7 +6,7 @@
 /* Unicode */
 
 #define setlocaleU() setlocale(LC_ALL, "spanish")
-#define fprintf(stream, format, ...) fprintf(stream, L""format, ##__VA_ARGS__)
+#define fprintf(stream, format, ...) fwprintf(stream, L""format, ##__VA_ARGS__)
 
 /* Unicode formats */
 
