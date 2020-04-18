@@ -21,7 +21,7 @@ install: all
 	$(INSTALL) -v -d "$(mandir)"
 	$(INSTALL) -v -d "$(man1dir)"
 	
-	-$(INSTALL_PROGRAM) "$(srcdir)/$(TARGET)" "$(bindir)"
+	$(INSTALL_PROGRAM) "$(srcdir)/$(TARGET)" "$(bindir)"
 	-$(INSTALL_PROGRAM) "$(srcdir)/install/$(TARGET)" "$(srvdir)"
 
 	if ! [ -f "$(srcdir)/doc/$(TARGET).1.gz" ] ; \
@@ -30,9 +30,9 @@ install: all
 	fi;
 
 	-$(INSTALL_DATA) "$(srcdir)/doc/$(TARGET).1.gz" "$(man1dir)"
-	-$(bindir)/systemctl daemon-reload
+	-systemctl daemon-reload
 	-$(srvdir)/$(TARGET) restart
-	-$(bindir)/systemctl enable $(TARGET)
+	-systemctl enable $(TARGET)
 
 
 uninstall:
