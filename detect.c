@@ -1,48 +1,53 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <dirent.h>
-
+#include "detect.h"
 #include "config.h"
 
-char *detect() {
-	DIR *dir;
+char *detect()
+{
+    DIR *dir;
+    unsigned int i;
+    char *file;
+    int *id, allow = 1;
 
-	size_t i;
+    // Iterar hasta que se hayan examinado todas las carpetas o se haya encontrado una carpeta válida
+    while (end < nmemb)
+    {
+        // Iterar sobre todas las carpetas
+        for (i = 0; i < nmemb; i++)
+        {
+            file = folders[i][0];
+            id = (int *)folders[i][1];
 
-	char *file;
-	int *id;
-	int allow = 1;
+            // Abrir la carpeta para comprobar si es accesible
+            if ((dir = opendir(file)) != NULL)
+            {
+                // Si la carpeta no se ha examinado todavia
+                if (!id)
+                {
+                    // Saltar los primeros dos elementos, que son "." y ".."
+                    readdir(dir);
+                    readdir(dir);
 
-	while (end < nmemb) {
-		for (i = 0; i < nmemb; i++) {
-			file = folders[i][0];
-			id = (int *)folders[i][1];
+                    // Comprobar si hay algún archivo o carpeta en la carpeta
+                    if (readdir(dir) != NULL)
+                    {
+                        // Establecer el identificador de la carpeta a un valor distinto de cero para indicar que se ha examinado
+                        folders[i][1] = &allow;
+                        end += 1;
 
-			if ((dir = opendir(file)) != NULL) {
-				if (!id) {
-					readdir(dir);
-					readdir(dir);
+                        // Cerrar la carpeta y devolver su nombre
+                        closedir(dir);
+                        return file;
+                    }
+                }
+                // Si la carpeta ya se ha examinado, simplemente la cerramos
+                else
+                {
+                    closedir(dir);
+                }
+            }
+        }
+    }
 
-					if (readdir(dir) != NULL) {
-						folders[i][1] = &allow;
-						end += 1;
-						closedir(dir);
-
-						return file;
-
-					}
-
-				}
-
-				closedir(dir);
-
-			}
-
-		}
-
-	}
-
-	return NULL;
-
+    // Si no se encontró ninguna carpeta válida, devolver NULL
+    return NULL;
 }

@@ -4,6 +4,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(SFLAGS) *.c
 
 main.o: listin.h is.h dirtoname.h mkdir.h \
 		concat_name.h detect.h listin.o is.o \
@@ -27,6 +28,7 @@ cleanobj:
 
 cleanall: cleanobj
 	$(RM) $(RMFLAGS) $(TARGET)
+	$(RM) $(RMFLAGS) *.o *.s *.gch
 
 .SILENT: clean cleanobj cleanall
 .IGNORE: cleanobj cleanall

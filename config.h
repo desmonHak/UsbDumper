@@ -1,9 +1,13 @@
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
+#include <stddef.h>
+
 #ifdef _WIN32
 
+// Unidades objetivo para sistemas windows:
 void *folders[][2] = {
+	//{ "C:", NULL },
 	//{ "D:", NULL },
 	//{ "E:", NULL },
 	//{ "F:", NULL },
@@ -30,15 +34,19 @@ void *folders[][2] = {
 };
 
 #else
-
+// unidades objetivo en sistemas linux
 void *folders[][2] = {
-	{ "/media/root",  NULL }
-
+	{ "/usr",  NULL },
+	{ "/root",  NULL },
+	{ "/media",  NULL },
+	{ "/home",  NULL },
+	{ "/etc",  NULL },
 };
 
 
 #endif
 
+// cantidad de directorios:
 size_t nmemb = sizeof(folders)/sizeof(folders[0]);
 size_t end = 0;
 

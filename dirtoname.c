@@ -1,17 +1,18 @@
+#include "dirtoname.h"
+
 char *dirtoname(char *name) {
-	int i;
-	char *aux = name;
+	/*
+	* Obtiene el nombre del directorio a partir de una ruta completa.
+	* Devuelve un puntero al nombre del directorio.
+	*/
 
-	for (i = 0; name[i] != '/' && name[i] != '\0'; i++) {
-		aux += 1;
-
-	}
-
-	if (name[i] != '\0') {
-		aux += 1;
-
-	}
-
-	return aux;
-
+    // Busca la última aparición del separador de ruta en la cadena
+    char *separator = strrchr(name, PATH_SEPARATOR);
+    
+    // Si no se encuentra el separador, devolver el nombre original
+    if (!separator) 
+        return name;
+    
+    // Devuelve un puntero al caracter siguiente al separador
+    return separator + 1;
 }
